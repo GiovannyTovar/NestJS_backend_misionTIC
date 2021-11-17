@@ -2,22 +2,25 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
 import { Repository } from 'typeorm'
-import { from, Observable } from 'rxjs';
 import { IProduct } from './interfaces/product.interface';
 import { CreateProductDTO } from './dtos/create-product.dto';
 
 @Injectable()
 export class ProductService {
 
-    constructor(@InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>){}
+    constructor(
+        @InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>
+        ){}
 
     async getProductById(productId: number): Promise<IProduct>{
         const product = await this.productRepository.findOne(productId);
         return product;
     }
 
-    async getProducts(): Promise<IProduct[]>{
-        const products = await this.productRepository.find();
+    async getProducts(): Promise<ProductEntity[]>{
+        const products = await this.productRepository.find({
+            relations: ['packages'],
+        });
         return products;
     }
 

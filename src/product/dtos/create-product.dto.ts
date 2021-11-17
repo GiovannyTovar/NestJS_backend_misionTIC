@@ -1,6 +1,6 @@
 import { IProduct } from "../interfaces/product.interface";
 
-export class CreateProductDTO implements IProduct{
+export class CreateProductDTO{
     product_name: string;
     product_description: string;
     product_photoURL: string;
