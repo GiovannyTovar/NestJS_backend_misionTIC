@@ -19,5 +19,6 @@ export class ProductEntity{
     product_state: boolean;
 
     //Relacion Uno a Muchos con la entidad packages
-    @OneToMany(type => PackageEntity, packages => packages.product) packages: PackageEntity[]; 
+    @OneToMany(type => PackageEntity, packages => packages.product) 
+    packages: PackageEntity[]; 
 }

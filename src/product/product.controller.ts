@@ -1,34 +1,44 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from '@nestjs/common';
 import { CreateProductDTO } from './dtos/create-product.dto';
+import { ProductService } from './product.service';
 
 @Controller('product')
 export class ProductController {
 
+    constructor(private readonly productService: ProductService){}
+
     @Get()
-    getStudents(){
-        return "ok";
+    async getProducts(@Res() res){
+        const products = await this.productService.getProducts();
+        return res.status(HttpStatus.OK).json({
+            data: products
+        });
     }
 
     @Get(':product_id')
-    getStudent(@Param('product_id') product_id: string){
-        console.log(product_id)
-        return {
-            message: 'Estudiante encontrado'
-        }
+    async getProduct(@Res() res, @Param('product_id') product_id: number){
+        const product = await this.productService.getProductById(product_id);
+        return res.status(HttpStatus.OK).json({
+            data: product
+        });
     }
 
     @Post()
-    createStudent(@Body() productDTO: CreateProductDTO){
-        return productDTO;
+    async createProduct(@Res() res, @Body() createProductDTO: CreateProductDTO){
+        const product = await this.productService.createProduct(createProductDTO);
+        return res.status(HttpStatus.CREATED).json({
+            message: 'recived',
+            data: product
+        });
     }
 
     @Put(':product_id')
-    updateStudent(@Param('product_id') product_id: string){
+    updateProduct(@Param('product_id') product_id: string){
 
     }
 
     @Delete(':product_id')
-    deleteStudent(@Param('product_id') product_id: string){
+    deleteProduct(@Param('product_id') product_id: string){
 
     }
 }
