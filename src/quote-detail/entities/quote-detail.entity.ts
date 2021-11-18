@@ -13,7 +13,7 @@ export class QuoteDetailEntity{
     quote_units: number;
 
     // Relacion Muchos a Uno con la entidad packages
-    @ManyToOne(type => PackageEntity, packages => packages.quoteDetail)
+    @ManyToOne(type => PackageEntity, packages => packages.quoteDetails)
     packages: PackageEntity;
 
     // Relacion Muchos a Uno con la entidad quotes

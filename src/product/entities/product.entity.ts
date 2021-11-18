@@ -3,10 +3,11 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity("products")
 export class ProductEntity{
-    @PrimaryGeneratedColumn()
-    produc_id: number;
 
-    @Column()
+    @PrimaryGeneratedColumn()
+    product_id: number;
+
+    @Column({unique:true})
     product_name: string;
 
     @Column()
@@ -16,7 +17,7 @@ export class ProductEntity{
     product_photoURL: string;
 
     @Column({default: 1})
-    product_state: boolean;
+    product_status: boolean;
 
     //Relacion Uno a Muchos con la entidad packages
     @OneToMany(type => PackageEntity, packages => packages.product) 

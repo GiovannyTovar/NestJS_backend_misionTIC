@@ -8,5 +8,5 @@ export class PackageDTO implements IPackage{
     package_x_units: number;
     package_base_price: number;
     package_state: boolean;
-    product: ProductEntity;
+    product?: ProductEntity;    // Revisar
 }

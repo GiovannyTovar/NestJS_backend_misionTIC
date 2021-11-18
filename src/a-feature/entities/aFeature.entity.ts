@@ -1,7 +1,7 @@
-import { PackageEntity } from "src/package/entities/package.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { FeatureByPackageEntity } from "src/features-by-package/entities/features-by-package.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("additionals_features")
+@Entity("additional_features")
 export class AditionalFeatureEntity{
     @PrimaryGeneratedColumn()
     feature_id: number;
@@ -13,12 +13,9 @@ export class AditionalFeatureEntity{
     feature_description: string;
 
     @Column()
-    feature_price_by_unit: number;
-
-    @Column()
     feature_state: boolean;
 
-    // Relacion Muchos A Uno con la entidad packages
-    @ManyToOne(type => PackageEntity, packages => packages.aFeatures) //package es una palabra reservada
-    packages: PackageEntity;
+    // Relacion Uno A Muchos con la entidad features_by_packages
+    @OneToMany(type => FeatureByPackageEntity, featureByPackage => featureByPackage.spackage) //package es una palabra reservada
+    featureByPackage: FeatureByPackageEntity[];
 }

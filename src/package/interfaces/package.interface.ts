@@ -7,5 +7,5 @@ export interface IPackage{
     readonly package_x_units: number;
     readonly package_base_price: number;
     readonly package_state: boolean;
-    readonly product: ProductEntity;
+    readonly product?: ProductEntity; // aca el dto de producto
 }

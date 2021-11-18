@@ -17,4 +17,7 @@ export class PackageService {
             relations: ['product'],
         });
     }
+
+    // Metodo para traer todos los paquetes por el id de producto
+    
 }

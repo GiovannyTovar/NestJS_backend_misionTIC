@@ -11,6 +11,7 @@ import { AFeatureModule } from './a-feature/a-feature.module';
 import { QuoteDetailModule } from './quote-detail/quote-detail.module';
 import { QuoteModule } from './quote/quote.module';
 import { DetailFeatureXquoteProductModule } from './detail-feature-xquote-product/detail-feature-xquote-product.module';
+import { FeaturesByPackageModule } from './features-by-package/features-by-package.module';
 
 @Module({
   imports: [
@@ -29,7 +30,7 @@ import { DetailFeatureXquoteProductModule } from './detail-feature-xquote-produc
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        synchronize: false, //true
       }),
       inject: [ConfigService],
     }),
@@ -39,7 +40,8 @@ import { DetailFeatureXquoteProductModule } from './detail-feature-xquote-produc
     AFeatureModule,
     QuoteDetailModule,
     QuoteModule,
-    DetailFeatureXquoteProductModule
+    DetailFeatureXquoteProductModule,
+    FeaturesByPackageModule
   ],
   controllers: [AppController],
   providers: [AppService],
