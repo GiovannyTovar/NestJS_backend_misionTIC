@@ -5,10 +5,10 @@ import { ProductService } from './product.service';
 @Controller('product')
 export class ProductController {
 
-    constructor(private readonly productService: ProductService){}
+    constructor(private readonly productService: ProductService) { }
 
     @Get()
-    async getProducts(@Res() res){
+    async getProducts(@Res() res) {
         const products = await this.productService.getProducts();
         return res.status(HttpStatus.OK).json({
             data: products
@@ -16,7 +16,7 @@ export class ProductController {
     }
 
     @Get(':product_id')
-    async getProduct(@Res() res, @Param('product_id') product_id: number){
+    async getProduct(@Res() res, @Param('product_id') product_id: number) {
         const product = await this.productService.getProductById(product_id);
         return res.status(HttpStatus.OK).json({
             data: product
@@ -24,7 +24,7 @@ export class ProductController {
     }
 
     @Post()
-    async createProduct(@Res() res, @Body() createProductDTO: CreateProductDTO){
+    async createProduct(@Res() res, @Body() createProductDTO: CreateProductDTO) {
         const product = await this.productService.createProduct(createProductDTO);
         return res.status(HttpStatus.CREATED).json({
             message: 'recived',
@@ -33,12 +33,25 @@ export class ProductController {
     }
 
     @Put(':product_id')
-    updateProduct(@Param('product_id') product_id: string){
-
+    async updateProduct(@Param('product_id') product_id: string, @Res() res, @Body() createProductDTO: CreateProductDTO) {
+        const updatedProduct = await this.productService.updateProduct(product_id, createProductDTO);
+        return res.status(HttpStatus.OK).json({
+            message: 'Updated',
+            data: updatedProduct
+        })
     }
 
     @Delete(':product_id')
-    deleteProduct(@Param('product_id') product_id: string){
-
+    async deleteProduct(@Param('product_id') product_id: number, @Res() res) {
+        const deletedProduct = await this.productService.deleteProduct(product_id);
+        if(!deletedProduct){
+            return res.status(HttpStatus.NOT_FOUND).json({
+                message: 'Product Not Found'
+            })
+        }
+        return res.status(HttpStatus.OK).json({
+            message: 'deleted',
+            data: deletedProduct
+        })
     }
 }

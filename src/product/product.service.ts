@@ -11,7 +11,7 @@ export class ProductService {
 
     constructor(@InjectRepository(ProductEntity) private readonly productRepository: Repository<ProductEntity>){}
 
-    async getProductById(productId: number): Promise<IProduct>{
+    async getProductById(productId: number): Promise<ProductEntity>{
         const product = await this.productRepository.findOne(productId);
         return product;
     }
@@ -28,14 +28,18 @@ export class ProductService {
         return product;
     }
 
-    async updateProduct(product_id: number, createProductDTO: CreateProductDTO): Promise<any>{
+    async updateProduct(product_id: string, createProductDTO: CreateProductDTO): Promise<any>{
         const updatedProduct = await this.productRepository.update(product_id, createProductDTO);
         return updatedProduct;
     }
 
-    async deleteProduct(product_id: number, productDTO: ProductDTO): Promise<any>{
-        productDTO.product_state = false;
-        const deletedProduct = await this.productRepository.update(product_id, productDTO);
-        return deletedProduct;
+    async deleteProduct(product_id: number): Promise<ProductEntity>{
+        const findProduct = await this.getProductById(product_id);
+        if(!findProduct){
+            return null;
+        }
+        findProduct.product_status = false;
+        await this.productRepository.update(product_id, findProduct);
+        return findProduct;
     }
 }

@@ -6,6 +6,6 @@ export class ProductDTO implements IProduct{
     product_name: string;
     product_description: string;
     product_photoURL: string;
-    product_state: boolean;
+    product_status: boolean;
     packages?: PackageEntity[]; 
 }

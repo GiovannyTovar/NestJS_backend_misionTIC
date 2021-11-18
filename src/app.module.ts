@@ -30,7 +30,7 @@ import { FeaturesByPackageModule } from './features-by-package/features-by-packa
         password: configService.get<string>(DB_PASSWORD),
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: false, //true
+        synchronize: true, //true
       }),
       inject: [ConfigService],
     }),

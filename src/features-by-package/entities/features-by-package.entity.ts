@@ -5,7 +5,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity('features_by_package')
 export class FeatureByPackageEntity{
     @PrimaryGeneratedColumn()
-    feature_by_package: number;
+    feature_by_package_id: number;
 
     @Column()
     feature_price_by_unit: number;

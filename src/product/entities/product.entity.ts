@@ -1,7 +1,7 @@
 import { PackageEntity } from "src/package/entities/package.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity("products")
+@Entity('products')
 export class ProductEntity{
 
     @PrimaryGeneratedColumn()

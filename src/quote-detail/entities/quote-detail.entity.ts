@@ -21,6 +21,6 @@ export class QuoteDetailEntity{
     quote: QuoteEntity;
 
     // Relacion Uno A Muchos con la entidad detail_feature_x_quote_product
-    @OneToMany(type => DetailFXProductQ, dfxqp => dfxqp.quote)   
+    @OneToMany(type => DetailFXProductQ, dfxqp => dfxqp.quoteDetail)   
     dfxqp: DetailFXProductQ[];
 }

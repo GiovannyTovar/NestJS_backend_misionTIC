@@ -11,5 +11,5 @@ export class DetailFXProductQ{
 
     // Relacion Muchos A Uno con la entidad quote_detail
     @ManyToOne(type => QuoteDetailEntity, quoteDetail => quoteDetail.dfxqp) 
-    quote: QuoteDetailEntity;
+    quoteDetail: QuoteDetailEntity;
 }
