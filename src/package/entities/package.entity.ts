@@ -21,8 +21,8 @@ export class PackageEntity{
     @Column()
     package_base_price: number;
 
-    @Column()
-    package_state: boolean;
+    @Column({default: 1})
+    package_status: boolean;
     
     // Relacion Muchos a Uno con la entidad products
     @ManyToOne(type => ProductEntity, product => product.packages) 

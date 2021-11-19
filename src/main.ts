@@ -5,6 +5,7 @@ import { SERVER_PORT } from './config/constants';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors;
   const configService = app.get(ConfigService);
 
   //Configurar Server port dinamico desde el archivo src/config/constants  

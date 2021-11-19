@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, Res } from '@nestjs/common';
 import { PackageService } from './package.service';
 
 @Controller('package')
@@ -20,4 +20,24 @@ export class PackageController {
             data: packageList
         })
     }
+
+    @Get('/by-product/:product_id')
+    async getPackagesByProductId(@Param('product_id') product_id: number, @Res() res){
+        const packagesFound = await this.packageService.getPackagesByProductId(product_id);
+        return res.status(HttpStatus.FOUND).json({
+            message: "Packages Found",
+            data: packagesFound
+        })
+    }
+
+    /**
+    @Post()
+    async createPackage(@Res() res, @Body() createPackage: CreatePackageDTO){
+        const createdPackage = await this.packageService.createPackage(createPackage);
+        return res.status(HttpStatus.CREATED).json({
+            message: 'Created',
+            data: createdPackage
+        })
+    }
+    */
 }

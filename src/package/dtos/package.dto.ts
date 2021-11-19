@@ -7,6 +7,6 @@ export class PackageDTO implements IPackage{
     package_description: string;
     package_x_units: number;
     package_base_price: number;
-    package_state: boolean;
+    package_status: boolean;
     product?: ProductEntity;    // Revisar
 }
