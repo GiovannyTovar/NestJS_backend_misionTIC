@@ -8,9 +8,7 @@ export class PackageController {
     @Get(':package_id')
     async getPackage(@Res() res,@Param('package_id') package_id: number){
         const packageOne = await this.packageService.getPackageById(package_id);
-        return res.status(HttpStatus.OK).json({
-            data: packageOne
-        })
+        return res.status(HttpStatus.OK).send(packageOne)
     }
 
     @Get()
