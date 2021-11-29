@@ -16,18 +16,13 @@ export class PackageController {
     @Get()
     async getPackages(@Res() res){
         const packageList = await this.packageService.getAll();
-        return res.status(HttpStatus.OK).json({
-            data: packageList
-        })
+        return res.status(HttpStatus.OK).send(packageList)
     }
 
     @Get('/by-product/:product_id')
     async getPackagesByProductId(@Param('product_id') product_id: number, @Res() res){
         const packagesFound = await this.packageService.getPackagesByProductId(product_id);
-        return res.status(HttpStatus.FOUND).json({
-            message: "Packages Found",
-            data: packagesFound
-        })
+        return res.status(HttpStatus.OK).send(packagesFound)
     }
 
     /**
